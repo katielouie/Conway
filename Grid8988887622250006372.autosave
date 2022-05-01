@@ -26,7 +26,8 @@ class Grid implements Pressable{
     }
 
     public boolean mouseOver() {
-        return(mouseX > x && mouseX < x + (dim*cellSize) && mouseY > y && mouseY < y + (dim*cellSize));  
+        return(mouseX > x && mouseX < x + (dim*cellSize) && mouseY > y && mouseY < y + (dim*cellSize)) ?
+        true : false;   
     }
     
     void display() {
@@ -40,44 +41,33 @@ class Grid implements Pressable{
     
 
     void update() {
-        boolean[][] newcells = new boolean[dim][dim];
-        for (int i = 0; i < dim; i++){
+      for (int i = 0; i < dim; i++){
             for (int j = 0; j < dim; j++) {
                 int total = total(i, j);
-                if (cells[i][j] && (total == 2 || total == 3)) {
-                    newcells[i][j] = true;
+                if (cells[i][j] && total < 2 || total > 3) {
+                    cells[i][j] = false;
                 } 
                 else if (total == 3) {
-                    newcells[i][j] = true;
-                }
-                else {
-                    newcells[i][j] = false;
+                    cells[i][j] = true;
                 }
                 if (total!=0)
                   print("x: "+i+", y: "+j+", "+total+"\n");
             }
         }
-        cells = newcells;
     }
 
     public int total(int i, int j) {
         int count = 0;
-        // int maxIndex = dim-1;
-        // if (i+1 > maxIndex) {
-        //     if (j+1 > maxIndex) {
-
-        //     }
-        // }
-        // print("i: "+i+", j: "+j+"\n");
-        // print("(i-1+dim)%dim: "+ (i-1+dim)%dim + "(i+1)%dim: "+ (i+1)%dim+  "\n");
-         count += cells[(i-1+dim)%dim][(j-1+dim)%dim] ? 1:0;
-         count += cells[(i-1+dim)%dim][j] ? 1:0;
-         count += cells[(i-1+dim)%dim][(j+1)%dim] ? 1:0;
-         count += cells[i][(j-1+dim)%dim] ? 1: 0;
-         count += cells[i][(j+1)%dim] ? 1: 0;
-         count += cells[(i+1)%dim][(j-1+dim)%dim]? 1: 0;
-         count += cells[(i+1)%dim][j]? 1: 0;
-         count += cells[(i+1)%dim][(j+1+dim)%dim]? 1: 0;
+        print("i: "+i+", j: "+j+"\n");
+        print("(i-1+dim)%dim: "+ (i-1+dim)%dim + "(i+1)%dim: "+ (i+1)%dim + "\n");
+        count += cells[(i-1+dim)%dim][(j-1+dim)%dim] ? 1:0;
+        count += cells[(i-1+dim)%dim][j] ? 1:0;
+        count += cells[(i-1+dim)%dim][(j+1)%dim] ? 1:0;
+        count += cells[i][(j-1+dim)%dim] ? 1: 0;
+        count += cells[i][(j+1)%dim] ? 1: 0;
+        count += cells[(i+1)%dim][(j-1+dim)%dim]? 1: 0;
+        count += cells[(i+1)%dim][j]? 1: 0;
+        count += cells[(i+1)%dim][(j+1+dim)%dim]? 1: 0;
         return count;
     }
     

@@ -39,4 +39,6 @@ class Button implements Pressable{
         }
         return false;
     }
+
+    public void pressed() {return;}
 }

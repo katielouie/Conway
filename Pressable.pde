@@ -1,4 +1,4 @@
 public interface Pressable {
-    public void mouseOver();
+    public boolean mouseOver();
     public void pressed();
 }
