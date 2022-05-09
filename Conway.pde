@@ -8,18 +8,14 @@ void setup() {
   
   size(950, 750);
   grid = new Grid(0,0, dim, cellSize);
-  // for (int x = 0; x < dim; x++){
-  //   for (int y = 0; y < dim; y++) {
-  //     cells[x][y] = new Cell(x*cellSize, y*cellSize, cellSize, true);
-  //     cells[x][y].display();
-  //   }
-  // }
-  //frameRate(20);
+  frameRate(20);
 }
 
 void draw() {
+  if (mode == 1) {
    grid.update();
-   grid.display();
+
+  };   grid.display();
 }
 
 void mousePressed(){
@@ -29,5 +25,5 @@ void mousePressed(){
 }
 
 void keyPressed() {
-  mode = 1;
+  mode = (mode == 1) ? 0:1;
 }

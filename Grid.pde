@@ -53,8 +53,6 @@ class Grid implements Pressable{
                 else {
                     newcells[i][j] = false;
                 }
-                if (total!=0)
-                  print("x: "+i+", y: "+j+", "+total+"\n");
             }
         }
         cells = newcells;
@@ -62,14 +60,6 @@ class Grid implements Pressable{
 
     public int total(int i, int j) {
         int count = 0;
-        // int maxIndex = dim-1;
-        // if (i+1 > maxIndex) {
-        //     if (j+1 > maxIndex) {
-
-        //     }
-        // }
-        // print("i: "+i+", j: "+j+"\n");
-        // print("(i-1+dim)%dim: "+ (i-1+dim)%dim + "(i+1)%dim: "+ (i+1)%dim+  "\n");
          count += cells[(i-1+dim)%dim][(j-1+dim)%dim] ? 1:0;
          count += cells[(i-1+dim)%dim][j] ? 1:0;
          count += cells[(i-1+dim)%dim][(j+1)%dim] ? 1:0;
@@ -79,6 +69,14 @@ class Grid implements Pressable{
          count += cells[(i+1)%dim][j]? 1: 0;
          count += cells[(i+1)%dim][(j+1+dim)%dim]? 1: 0;
         return count;
+    }
+    
+    public void randomize(int percent) {
+        for (int i = 0; i < dim; i++){
+            for (int j = 0; j < dim; j++) {
+              cells[i][j] = (random(0,(100/percent)) == 0);
+            }
+        }
     }
     
 }
